@@ -1,16 +1,15 @@
 {
     "technologies": {
         "apis": [
-            "insert apis"
         ],
         "platforms": [
-            "insert platforms"
+            "Chrome Apps"
         ],
         "toolkits": [
-            "insert toolkits"
+            "jquery.js",
+            "box2dweb.js"
         ]
     },
     "themes": [
-        "insert themes"
     ]
 }
