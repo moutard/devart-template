@@ -1,17 +1,18 @@
 # Project Title
-Insert the name of your project
+Le Petit Nicolas
 
 ## Authors
-- Insert main author name, surname, github account
-- Insert other author(s) name, surname, github account (one per list element)
+- Raphael, Moutard, moutard
 
 ## Description
-Insert a description containing about 100 to 150 words, including your motivation and the meaning behind your idea and execution. The Judges will be keen to know how your idea pushes the boundaries of code and technology. 
+Le Petit Nicolas is a French children’s book, illustrated by the famous catroonist Sempé. Where the main character, the seven years old Nicolas tell you it’s own story, focused on it’s own percepective of the world far from an adult interpretation.
+
+I have always been impressed by the drawing. Uncluttered, empty background, only black and white, except for a small detail the red pullover of Nicolas. But you can evoke many emotions with a few black lines.
+
+That’s why I decided to try to do the same. Forget the billion colors, high resolution screens, 3D. Focus on the essential, uncluttered. And tell a story. Because I like to think that art can be as simple as telling a story.
 
 ## Link to Prototype
-NOTE: If your project lives online you can add one or more links here. Make sure you have a stable version of your project running before linking it.
-
-[Example Link](http://www.google.com "Example Link")
+soon
 
 ## Example Code
 NOTE: Wrap your code blocks or any code citation by using ``` like the example below.
