@@ -1,6 +1,7 @@
 # Le Petit Nicolas
 
-## Raphael, Moutard, moutard
+## Authours
+- Raphael Moutard, (moutard)
 
 The project “Le Petit Nicolas” is a simple interface that displays small characters who interact with each others and with the audience in order to tell a story.
 
