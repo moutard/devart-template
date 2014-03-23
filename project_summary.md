@@ -5,7 +5,9 @@ Le Petit Nicolas
 - Raphael, Moutard, moutard
 
 ## Description
-Le Petit Nicolas is a French children’s book, illustrated by the famous catroonist Sempé. Where the main character, the seven years old Nicolas tell you it’s own story, focused on it’s own percepective of the world far from an adult interpretation.
+The project “Le Petit Nicolas” is a simple interface that displays small characters who interact with each others and with the audience in order to tell a story.
+
+This project is inspired by the French children’s book “Le Petit Nicolas”, illustrated by the famous cartoonist Sempe. The main character is a seven years old boy called Nicolas, that tells you it’s own story, focused on it’s own percepective of the world far from an adult interpretation.
 
 I have always been impressed by the drawing. Uncluttered, empty background, only black and white, except for a small detail the red pullover of Nicolas. But you can evoke many emotions with a few black lines.
 
