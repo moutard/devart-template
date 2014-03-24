@@ -73,9 +73,12 @@
       var DEBUG = false;
 
       var $canvas = document.getElementById("canvas");
+      var iCanvasHeight = $canvas.height;
+      var iCanvasWidth = $canvas.width;
       var $context = $canvas.getContext("2d");
       var oB2World = B2WorldFactory(DEBUG, $context);
-      new ni.Classroom(oB2World, SCALE);
+
+      var oClassroom = new ni.Classroom(oB2World, iCanvasWidth, iCanvasHeight);
 
       // Create the characters.
       for(var i = 1; i < 10; ++i) {

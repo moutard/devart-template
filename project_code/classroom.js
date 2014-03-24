@@ -10,8 +10,7 @@
     /**
      * Create the Ground and the edge of the scene were evoluate the characters.
      */
-    ni.Classroom = function (_oB2World, SCALE) {
-      var SIZE = SCALE;
+    ni.Classroom = function (_oB2World, iWidth, iHeight) {
       var fixDef = new b2FixtureDef;
       fixDef.density = 1.0;
       fixDef.friction = 0.5;
@@ -19,17 +18,27 @@
 
       var bodyDef = new b2BodyDef;
 
+      var iWall = 2;
       bodyDef.type = b2Body.b2_staticBody;
       fixDef.shape = new b2PolygonShape;
-      fixDef.shape.SetAsBox(SIZE*20, SIZE*2);
-      bodyDef.position.Set(SIZE*10, SIZE * 400 / 30 + 1.8);
+      // roof
+      fixDef.shape.SetAsBox(iWidth, iWall);
+      bodyDef.position.Set(0, 0);
       _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      bodyDef.position.Set(SIZE * 10, SIZE * -1.8);
+
+      // floor
+      fixDef.shape.SetAsBox(iWidth, iWall);
+      bodyDef.position.Set(0, iHeight);
       _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      fixDef.shape.SetAsBox(SIZE*2, SIZE*14);
-      bodyDef.position.Set(SIZE*-1.8, SIZE*13);
+
+      // left wall
+      fixDef.shape.SetAsBox(iWall, iHeight);
+      bodyDef.position.Set(0, 0);
       _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      bodyDef.position.Set(SIZE*21.8, SIZE*13);
+
+      // rigth wall
+      fixDef.shape.SetAsBox(iWall, iHeight);
+      bodyDef.position.Set(iWidth - iWall, 0);
       _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
 
       this.fixDef = fixDef;
