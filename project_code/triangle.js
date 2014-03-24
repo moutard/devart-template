@@ -1,4 +1,4 @@
-(function() {
+(function(_ni) {
 
     // Init som useful stuff for easier access (don't need 'em all)
     var   b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -27,6 +27,9 @@
         };
     })();
 
+    // nicolas namespace
+    var ni = _ni || {};
+
     // TODO: compute the scale depending of the size of the canvas.
     var SCALE = 30;
 
@@ -47,96 +50,6 @@
             world.SetDebugDraw(debugDraw);
         }
         return world;
-    }
-
-    /**
-     * Create the Ground and the edge of the scene were evoluate the characters.
-     */
-    function Ground (_oB2World) {
-      var SIZE = SCALE;
-      var fixDef = new b2FixtureDef;
-      fixDef.density = 1.0;
-      fixDef.friction = 0.5;
-      fixDef.restitution = 0.2;
-
-      var bodyDef = new b2BodyDef;
-
-      bodyDef.type = b2Body.b2_staticBody;
-      fixDef.shape = new b2PolygonShape;
-      fixDef.shape.SetAsBox(SIZE*20, SIZE*2);
-      bodyDef.position.Set(SIZE*10, SIZE * 400 / 30 + 1.8);
-      _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      bodyDef.position.Set(SIZE * 10, SIZE * -1.8);
-      _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      fixDef.shape.SetAsBox(SIZE*2, SIZE*14);
-      bodyDef.position.Set(SIZE*-1.8, SIZE*13);
-      _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-      bodyDef.position.Set(SIZE*21.8, SIZE*13);
-      _oB2World.CreateBody(bodyDef).CreateFixture(fixDef);
-
-      this.fixDef = fixDef;
-      this.bodyDef = bodyDef;
-
-      this.draw = function() {};
-    }
-
-    /**
-     * Each character of the scene is represented as a triangle. That can
-     * interact with the others.
-     */
-    function Triangle (dOptions) {
-
-      var self = this;
-      this.id = dOptions["id"] || Math.random()*60000;
-      var SIZE = SCALE;
-      var sin60 = 0.866;
-      var cos60 = 0.5;
-      var fixDef = new b2FixtureDef;
-      fixDef.density = dOptions.density || 1.0;
-      fixDef.friction = dOptions.density || 0.0;
-      fixDef.restitution = dOptions.density || 0.9;
-
-      fixDef.shape = new b2PolygonShape;
-      fixDef.shape.SetAsArray([
-        new b2Vec2(SIZE*sin60, SIZE*cos60),
-        new b2Vec2(SIZE*-sin60, SIZE*cos60),
-        new b2Vec2(0, SIZE*-1)], 3
-      );
-
-      var bodyDef = new b2BodyDef;
-      bodyDef.type = b2Body.b2_dynamicBody;
-      bodyDef.position.x = Math.random() * 200;
-      bodyDef.position.y = Math.random() * 200;
-      bodyDef.userData = {"id": self.id};
-
-      this.fixDef = fixDef;
-      this.bodyDef = bodyDef;
-
-      this.b2Body = null;
-
-      this.color = dOptions.color || "#000";
-
-      /**
-       * Method to render the object in the canvas.
-       * Remind that box2d has been designed to be light so it doesn't provide
-       * render methods.
-       */
-      this.draw = function(ctx) {
-        var cos60 = 0.5;
-        var sin60 = 0.866;
-
-        ctx.save();
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.translate(this.b2Body.GetPosition().x,  this.b2Body.GetPosition().y);
-        ctx.rotate(this.b2Body.GetAngle());
-        ctx.moveTo(SIZE*sin60, SIZE*cos60);
-        ctx.lineTo(SIZE*-sin60, SIZE*cos60);
-        ctx.lineTo(0, SIZE*-1);
-        ctx.fill();
-        ctx.translate(0,0);
-        ctx.restore();
-      };
     }
 
     function loopDraw (_o2BWorld, shapes, _$ctx) {
@@ -162,13 +75,13 @@
       var $canvas = document.getElementById("canvas");
       var $context = $canvas.getContext("2d");
       var oB2World = B2WorldFactory(DEBUG, $context);
-      new Ground(oB2World);
+      new ni.Classroom(oB2World, SCALE);
 
       // Create the characters.
       for(var i = 1; i < 10; ++i) {
-        SHAPES[i] = new Triangle({"id" : i});
+        SHAPES[i] = new ni.Character({"id" : i, "size": SCALE});
       }
-      SHAPES["nicolas"] = new Triangle({"id": "nicolas", "color": "#FF2A2A"})
+      SHAPES["nicolas"] = new ni.Character({"id": "nicolas", "color": "#FF2A2A", "size": SCALE})
 
       // Add characters to the scene (oB2World)
       for (var index in SHAPES) {
@@ -195,4 +108,4 @@
 
 
     })();
-})();
+})(ni);
