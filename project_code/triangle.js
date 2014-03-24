@@ -36,7 +36,7 @@
      * {context}
      */
     function B2WorldFactory(debug, ctx) {
-        var world = new b2World(new b2Vec2(0, 10), false);
+        var world = new b2World(new b2Vec2(0, 0), false);
         if (debug) {
             var debugDraw = new b2DebugDraw();
             debugDraw.SetSprite(ctx);
@@ -81,10 +81,25 @@
       var oClassroom = new ni.Classroom(oB2World, iCanvasWidth, iCanvasHeight);
 
       // Create the characters.
-      for(var i = 1; i < 10; ++i) {
-        CLASS[i] = new ni.Character({'id' : i, 'size': SCALE, 'x': i * 2* SCALE, 'y': SCALE });
+      for (var i = 1; i < 10; ++i) {
+        for (var j = 1; j < 10; ++j) {
+          var sId = "w:" + i + "h:" + j;
+          CLASS[sId] = new ni.Character({
+            'id' :  sId,
+            'size': SCALE,
+            'x': i * 3 * SCALE,
+            'y': j * 3 * SCALE
+          });
+        }
       }
-      CLASS["nicolas"] = new ni.Character({"id": "nicolas", "color": "#FF2A2A", "size": SCALE})
+      delete CLASS["w:2h:7"];
+      CLASS['nicolas'] = new ni.Character({
+        'id': 'nicolas',
+        'color': '#FF2A2A',
+        'size': SCALE,
+        'x': 2 * 3 * SCALE,
+        'y': 7 * 3 * SCALE
+      });
 
       // Add characters to the scene (oB2World)
       for (var index in CLASS) {
