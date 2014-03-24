@@ -30,9 +30,6 @@
     // nicolas namespace
     var ni = _ni || {};
 
-    // TODO: compute the scale depending of the size of the canvas.
-    var SCALE = 30;
-
     /**
      * Factory to create the B2World.
      * {Bool} debug
@@ -69,12 +66,15 @@
      * loop.
      */
     (function main() {
-      var SHAPES = {};
+      var CLASS = {};
       var DEBUG = false;
 
       var $canvas = document.getElementById("canvas");
       var iCanvasHeight = $canvas.height;
       var iCanvasWidth = $canvas.width;
+      // Compute the scale depending of the size of the canvas.
+      // 10 is the number of triangle by lines.
+      var SCALE = iCanvasWidth / 80;
       var $context = $canvas.getContext("2d");
       var oB2World = B2WorldFactory(DEBUG, $context);
 
@@ -82,15 +82,15 @@
 
       // Create the characters.
       for(var i = 1; i < 10; ++i) {
-        SHAPES[i] = new ni.Character({'id' : i, 'size': SCALE, 'x': i * 2* SCALE, 'y': SCALE });
+        CLASS[i] = new ni.Character({'id' : i, 'size': SCALE, 'x': i * 2* SCALE, 'y': SCALE });
       }
-      SHAPES["nicolas"] = new ni.Character({"id": "nicolas", "color": "#FF2A2A", "size": SCALE})
+      CLASS["nicolas"] = new ni.Character({"id": "nicolas", "color": "#FF2A2A", "size": SCALE})
 
       // Add characters to the scene (oB2World)
-      for (var index in SHAPES) {
-        var oB2Body = oB2World.CreateBody(SHAPES[index].bodyDef);
-        oB2Body.CreateFixture(SHAPES[index].fixDef);
-        SHAPES[index].b2Body = oB2Body;
+      for (var index in CLASS) {
+        var oB2Body = oB2World.CreateBody(CLASS[index].bodyDef);
+        oB2Body.CreateFixture(CLASS[index].fixDef);
+        CLASS[index].b2Body = oB2Body;
       }
 
       // Main loop.
@@ -104,7 +104,7 @@
           if (DEBUG) {
               oB2World.DrawDebugData();
           } else {
-            loopDraw(oB2World, SHAPES, $context);
+            loopDraw(oB2World, CLASS, $context);
           }
           requestAnimFrame(loop);
       })();
