@@ -108,10 +108,6 @@
         CLASS[index].b2Body = oB2Body;
       }
 
-      var oNicolasBody = CLASS['nicolas'].b2Body;
-      var force = new b2Vec2(1500.0, -1000.0);
-      var point = oNicolasBody.GetPosition();
-      oNicolasBody.ApplyImpulse(force, point);
       // Main loop.
       // At each step, use box2d method to recompute each triangle position,
       // and redraw the object in the canvas.
@@ -128,6 +124,10 @@
           requestAnimFrame(loop);
       })();
 
-
+      document.addEventListener("mousedown", function(e) {
+         CLASS['nicolas'].impulse();
+      }, true);
     })();
+
+
 })(ni);

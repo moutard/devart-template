@@ -9,6 +9,9 @@
   // Le petit nicolas namespace
   var ni = _ni || {};
 
+  function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }
   /**
    * Each character of the scene is represented as a triangle. That can
    * interact with the others.
@@ -44,6 +47,24 @@
       this.b2Body = null;
 
       this.color = dOptions['color'] || "#000";
+
+      this.impulse = function() {
+          var force = new b2Vec2(1500.0, -1000.0);
+          var point = this.b2Body.GetPosition();
+          this.b2Body.ApplyImpulse(force, point);
+      };
+
+      this.agite = function() {
+        var angle = this.b2Body.GetAngle();  // find the current "forward" direction
+        var force = getRandomArbitrary(1.0, 4.0);    // get a random force vector
+        this.b2Body.SetLinearDamping(1.0);  // simulate friction
+        this.b2Body.SetAngularDamping(1.0);  // prevent exponential spinning
+        this.b2Body.ApplyImpulse(b2Vec2(Math.cos(angle) * force, Math.sin(angle) * force),
+            this.b2Body.GetWorldCenter());  // move the player
+        var randValue =  getRandomArbitrary(-2.0, 2.0) * getRandomArbitrary(25, 115);
+        // get a random rotational vector in radians
+        this.b2Body.ApplyTorque(randValue);  // apply the transform to set a new angle on the body
+      };
 
       this.goBacktoInitialPosition = function() {
 
