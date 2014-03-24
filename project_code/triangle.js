@@ -79,7 +79,7 @@
 
       // Create the characters.
       for(var i = 1; i < 10; ++i) {
-        SHAPES[i] = new ni.Character({"id" : i, "size": SCALE});
+        SHAPES[i] = new ni.Character({'id' : i, 'size': SCALE, 'x': i * 2* SCALE, 'y': SCALE });
       }
       SHAPES["nicolas"] = new ni.Character({"id": "nicolas", "color": "#FF2A2A", "size": SCALE})
 

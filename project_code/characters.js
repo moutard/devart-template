@@ -21,9 +21,9 @@
       var sin60 = 0.866;
       var cos60 = 0.5;
       var fixDef = new b2FixtureDef;
-      fixDef.density = dOptions.density || 1.0;
-      fixDef.friction = dOptions.density || 0.0;
-      fixDef.restitution = dOptions.density || 0.9;
+      fixDef.density = dOptions['density'] || 1.0;
+      fixDef.friction = dOptions['friction'] || 0.0;
+      fixDef.restitution = dOptions['restitution'] || 0.9;
 
       fixDef.shape = new b2PolygonShape;
       fixDef.shape.SetAsArray([
@@ -34,8 +34,8 @@
 
       var bodyDef = new b2BodyDef;
       bodyDef.type = b2Body.b2_dynamicBody;
-      bodyDef.position.x = Math.random() * 200;
-      bodyDef.position.y = Math.random() * 200;
+      bodyDef.position.x = dOptions['x'] || Math.random() * 200;
+      bodyDef.position.y = dOptions['y'] || Math.random() * 200;
       bodyDef.userData = {"id": self.id};
 
       this.fixDef = fixDef;
@@ -43,7 +43,11 @@
 
       this.b2Body = null;
 
-      this.color = dOptions.color || "#000";
+      this.color = dOptions['color'] || "#000";
+
+      this.goBacktoInitialPosition = function() {
+
+      };
 
       /**
        * Method to render the object in the canvas.
